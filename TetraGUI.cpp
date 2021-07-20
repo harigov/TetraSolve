@@ -59,7 +59,7 @@ TetraGUIFrame::TetraGUIFrame (const wxChar *appName) :
 					wxDefaultSize, wxTE_MULTILINE|wxTE_READONLY);
 	logger = new wxLogTextCtrl (logtext);
 	wxLog::SetActiveTarget (logger);
-	logger->SetTimestamp (NULL);
+	// logger->SetTimestamp (NULL);
 
 	csgmodel = new TetraCSGModel ();
 	
@@ -1002,7 +1002,7 @@ void TetraGUIFrame::OnFileSaveCSGModel (wxCommandEvent& ce)
 	}
 
 	fd = new wxFileDialog (this);
-	fd->SetStyle (wxSAVE);
+	//fd->SetStyle (wxFC_SAVE);
 	if (fd->ShowModal () == wxID_OK)
 	{
 		fname = fd->GetPath ().ToAscii().data();
@@ -1040,7 +1040,7 @@ void TetraGUIFrame::OnFileSaveFEMModel (wxCommandEvent& ce)
 	wxFileDialog *fd = new wxFileDialog (this);
 	const char* fname;
 	
-	fd->SetStyle (wxSAVE);
+	// fd->SetStyle (wxFC_SAVE);
 	if (fd->ShowModal () == wxID_OK)
 	{
 		fname = fd->GetPath ().ToAscii().data();

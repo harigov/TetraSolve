@@ -1,7 +1,7 @@
 CC=g++
-CXXOPTS=-c `wx-config --cxxflags` -I /usr/X11R6/include -arch i386 -arch ppc
+CXXOPTS=-c `wx-config --cxxflags` -I /usr/X11R6/include 
 LINK=g++
-LINKOPTS=`wx-config --libs --gl-libs` -framework OpenGL -arch i386 -arch ppc -L foldbar/foldbar.dylib -L symex/symex.dylib -L tetgen/tetgen.dylib
+LINKOPTS=`wx-config --libs ` -L foldbar/foldbar.so -L symex/symex.so -L tetgen/tetgen.so
 OBJ_FILES=AdaptiveMesher.o				\
 					AddDisplacementDialog.o \
 					AddElementDialog.o			\
@@ -20,19 +20,6 @@ OBJ_FILES=AdaptiveMesher.o				\
 
 TetraGUI:$(OBJ_FILES)
 	$(LINK) $(LINKOPTS) $(OBJ_FILES) -o TetraGUI
-	mkdir TetraSolve.app
-	mkdir TetraSolve.app/Contents
-	mkdir TetraSolve.app/Contents/MacOS
-	mkdir TetraSolve.app/Contents/Resources
-	mkdir TetraSolve.app/Contents/Frameworks
-	mkdir TetraSolve.app/Contents/Resources/English.lproj
-	cp Info.plist TetraSolve.app/Contents
-	#cp version.plist TetraSolve.app/Contents
-	echo -n "APPLTTSL" > TetraSolve.app/Contents/PkgInfo
-	cp TetraGUI TetraSolve.app/Contents/MacOS/TetraGUI
-	cp foldbar/foldbar.dylib TetraSolve.app/Contents/Frameworks
-	cp symex/symex.dylib TetraSolve.app/Contents/Frameworks
-	cp tetgen/tetgen.dylib TetraSolve.app/Contents/Frameworks
 
 AdaptiveMesher.o:AdaptiveMesher.cpp AdaptiveMesher.h
 	$(CC) $(CXXOPTS) AdaptiveMesher.cpp -o AdaptiveMesher.o
